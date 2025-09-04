@@ -2,6 +2,21 @@ import mongoose from "mongoose";
 import User from "../models/user.model.js";
 import { isUserOnline } from "../lib/socket.js"; // path to where you export it
 
+// ✅ Get all users except the logged-in one
+export const getUsersForSidebar = async (req, res) => {
+  try {
+    const users = await User.find({ _id: { $ne: req.user._id } }).select(
+      "-password"
+    );
+
+    res.status(200).json(users);
+  } catch (err) {
+    console.error("getUsersForSidebar error:", err.message);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+// ✅ Get last seen info for one user
 export const getLastSeen = async (req, res) => {
   const { id } = req.params;
 
