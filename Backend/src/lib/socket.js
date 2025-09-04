@@ -9,13 +9,9 @@ const ORIGIN = process.env.CLIENT_URL || "http://localhost:5173";
 
 const io = new Server(server, {
   cors: {
-<<<<<<< HEAD
-    origin: ORIGIN,
+    origin: ORIGIN,         // allow frontend (localhost or Vercel)
     methods: ["GET", "POST"],
-    credentials: true, // 🔑 allow cookies/tokens
-=======
-    origin: ["https://update-chat-app-1.onrender.com"],
->>>>>>> 4585877d23197c797a15d5b7da46cbfb9ca9f912
+    credentials: true       // allow cookies/auth headers
   },
 });
 
